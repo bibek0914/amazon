@@ -6,7 +6,7 @@ pipeline {
 
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
-                    bat 'mvn clean compile'
+                    bat cd 'com.Amazon & mvn clean compile'
                 }
             }
         }
@@ -15,7 +15,7 @@ pipeline {
 
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
-                    bat 'mvn test'
+                    bat cd 'com.Amazon & mvn test'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage ('Deployment Stage') {
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
-                    bat 'mvn deploy'
+                    bat cd 'com.Amazon & mvn deploy'
                 }
             }
         }
