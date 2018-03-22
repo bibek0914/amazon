@@ -1,25 +1,36 @@
- def workspace;
-node{
-   stage ('Checkout')
-   {
-       
-       checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '1d63b82f-52b3-412d-951e-9029e47d7382', url: 'https://github.com/bibek0914/amazon.git']]])
-       workspace=pwd()
+pipeline {
+agenet any
+ stages {
+  stage('compile stage') {
+   steps {
+    withmaven(maven: mvn_3.5.0) {
+     sh mvn 'clean compile'
+    }
    }
-    stage('static code analysis')
-   {
-     echo ("static code analysis")
+  }
+   stage('testing stage') {
+   steps {
+    withmaven(maven: mvn_3.5.0) {
+     sh mvn 'test'
+    }
    }
-   stage('Build')
-   {
-     echo ("Build the code")
-}
-stage('testing')
-   {
-     echo ("testing")
-}
-stage('Delivary')
-   {
-     echo ("delivary")
-}
+  }
+   stage('compile stage') {
+   steps {
+    withmaven(maven: mvn_3.5.0) {
+     sh mvn 'clean compile'
+    }
+   }
+  }
+  stage('deploy stage') {
+   steps {
+    withmaven(maven: mvn_3.5.0) {
+     sh mvn 'deploy'
+    }
+   }
+  }
+  
+  
+ }
+ 
 }
