@@ -3,14 +3,14 @@ agenet any
  stages {
   stage('compile stage') {
    steps {
-    withmaven(maven: MAVEN_HOME) {
+    withMaven(maven: MAVEN_HOME) {
      sh mvn 'clean compile'
     }
    }
   }
    stage('testing stage') {
    steps {
-    withmaven(maven: MAVEN_HOME) {
+    withMaven(maven: MAVEN_HOME) {
      sh mvn 'test'
     }
    }
@@ -18,7 +18,7 @@ agenet any
    
   stage('deploy stage') {
    steps {
-    withmaven(maven: MAVEN_HOME) {
+    withMaven(maven: MAVEN_HOME) {
      sh mvn 'deploy'
     }
    }
